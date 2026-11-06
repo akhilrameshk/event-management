@@ -1,0 +1,29 @@
+html { background: #0a0a0c; }
+
+/* ---------- Branded page loader (black + gold) ---------- */
+.ee-loader {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px;
+  background: radial-gradient(circle at 50% 42%, #1c1710 0%, #0a0a0c 62%);
+  transition: opacity .6s ease, visibility .6s;
+}
+.ee-loader.ee-hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.ee-loader.route { animation: ee-fade .25s ease .35s both; } /* short navigations never flash the loader */
+.ee-mark { position: relative; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; }
+.ee-ring, .ee-ring2 { position: absolute; border-radius: 50%; border: 1px solid transparent; }
+.ee-ring { inset: 0; border-top-color: #d4af37; border-right-color: rgba(212,175,55,.25); animation: ee-spin 1.6s linear infinite; }
+.ee-ring2 { inset: 12px; border-bottom-color: #f1d98a; border-left-color: rgba(241,217,138,.2); animation: ee-spin 2.4s linear infinite reverse; }
+.ee-shield { width: 58px; height: auto; filter: drop-shadow(0 0 14px rgba(212,175,55,.45)); animation: ee-pulse 1.8s ease-in-out infinite; }
+.ee-name {
+  font-family: Georgia, 'Times New Roman', serif; font-size: 18px; letter-spacing: .5em; padding-left: .5em; text-transform: uppercase;
+  background: linear-gradient(90deg, #8a6414 0%, #f6e3a1 45%, #d4af37 55%, #8a6414 100%); background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: ee-shine 2.2s linear infinite;
+}
+.ee-bar { width: 160px; height: 2px; background: rgba(212,175,55,.18); overflow: hidden; }
+.ee-bar i { display: block; height: 100%; width: 40%; background: linear-gradient(90deg, transparent, #f1d98a, transparent); animation: ee-slide 1.3s ease-in-out infinite; }
+@keyframes ee-spin { to { transform: rotate(360deg); } }
+@keyframes ee-pulse { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.08); opacity: 1; } }
+@keyframes ee-shine { to { background-position: -200% 0; } }
+@keyframes ee-slide { 0% { transform: translateX(-120%); } 100% { transform: translateX(320%); } }
+@keyframes ee-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ee-ring, .ee-ring2, .ee-shield, .ee-name, .ee-bar i { animation: none; } }

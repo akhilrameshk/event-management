@@ -1,0 +1,27 @@
+{
+  "name": "elegant-events",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "hash": "node scripts/hash.js"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@mui/material-nextjs": "^5.15.11",
+    "next": "14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.4.0",
+    "mongoose": "^8.4.1",
+    "cloudinary": "^2.5.1"
+  }
+}

@@ -1,0 +1,12 @@
+import { redirect } from 'next/navigation';
+import { getSession } from '@/lib/session';
+import AdminShell from '@/components/admin/AdminShell';
+
+export const dynamic = 'force-dynamic';
+
+export default async function PanelLayout({ children }) {
+  // Middleware already blocks unauthenticated requests; this is a second check.
+  const session = await getSession();
+  if (!session) redirect('/admin/login');
+  return <AdminShell email={session.email}>{children}</AdminShell>;
+}
