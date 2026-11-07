@@ -10,6 +10,9 @@ import AutoAwesomeOutlined from '@mui/icons-material/AutoAwesomeOutlined';
 import PhotoLibraryOutlined from '@mui/icons-material/PhotoLibraryOutlined';
 import CloudUploadOutlined from '@mui/icons-material/CloudUploadOutlined';
 import SettingsOutlined from '@mui/icons-material/SettingsOutlined';
+import DescriptionOutlined from '@mui/icons-material/DescriptionOutlined';
+import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
+import FormatQuote from '@mui/icons-material/FormatQuote';
 import Logout from '@mui/icons-material/Logout';
 import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlined from '@mui/icons-material/LightModeOutlined';
@@ -18,7 +21,10 @@ import { useT } from '@/components/ui';
 
 export const ADMIN_MENU = [
   { label: 'Dashboard', href: '/admin', Icon: DashboardOutlined },
+  { label: 'Pages (Home & About)', href: '/admin/pages', Icon: DescriptionOutlined },
   { label: 'Our Works', href: '/admin/works', Icon: AutoAwesomeOutlined },
+  { label: 'Team', href: '/admin/team', Icon: GroupsOutlined },
+  { label: 'Testimonials', href: '/admin/testimonials', Icon: FormatQuote },
   { label: 'Media Library', href: '/admin/media', Icon: PhotoLibraryOutlined },
   { label: 'Upload', href: '/admin/upload', Icon: CloudUploadOutlined },
   { label: 'Settings', href: '/admin/settings', Icon: SettingsOutlined },
@@ -32,7 +38,7 @@ function SideMenu({ email, onNavigate, onLogout }) {
   return (
     <Box sx={{ height: '100%', bgcolor: t.footerBg, color: t.onDeepMuted, display: 'flex', flexDirection: 'column', py: 3 }}>
       <Box sx={{ px: 3.5, pb: 3.5 }}>
-        <Image src="/logo.png" alt="Elegant Events" width={445} height={280} style={{ width: 150, height: 'auto' }} />
+        <Image src="/logo.png" alt="Elegant Events" width={760} height={311} style={{ width: 150, height: 'auto' }} />
       </Box>
       <Box component="nav" sx={{ flex: 1 }}>
         {ADMIN_MENU.map(({ label, href, Icon }) => {

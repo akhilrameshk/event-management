@@ -5,6 +5,8 @@ import { useT, GoldButton } from '@/components/ui';
 import { PageHeader, StatCard, Panel } from './ui';
 
 const ACTIONS = [
+  ['Edit Home & About', '/admin/pages'],
+  ['Add Team Member', '/admin/team'],
   ['Add New Work', '/admin/works'],
   ['Upload Photos', '/admin/upload'],
   ['Upload Video', '/admin/upload'],

@@ -22,7 +22,7 @@ export default function Header() {
       <AppBar position="sticky" elevation={0} sx={{ bgcolor: t.headerBg, color: t.onDeep, backdropFilter: 'blur(10px)', backgroundImage: 'none', borderBottom: `1px solid ${t.deepLine}` }}>
         <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 9 }, minHeight: { xs: 60, md: 76 } }}>
           <Link href="/" aria-label="Elegant Events home">
-            <Image src="/logo.png" alt={`${site.name} logo`} width={445} height={280} priority style={{ height: 56, width: 'auto', display: 'block' }} />
+            <Image src="/logo.png" alt={`${site.name} logo`} width={760} height={311} priority style={{ height: 56, width: 'auto', display: 'block' }} />
           </Link>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 4.5 }}>

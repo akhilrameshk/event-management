@@ -1,7 +1,11 @@
 import { connectDB } from './db';
 import Media from '@/models/Media';
 import Work from '@/models/Work';
-import { DEFAULT_WORKS } from '@/config/site';
+import mongoose from 'mongoose';
+import Setting from '@/models/Setting';
+import Team from '@/models/Team';
+import Testimonial from '@/models/Testimonial';
+import { DEFAULT_WORKS, mergeContent } from '@/config/site';
 import { mediaUrls } from './cloudinary';
 
 const SAMPLE_GALLERY = [
@@ -84,4 +88,44 @@ export async function getFeatured(limit = 7) {
     if (docs.length >= 4) return docs.map(serializeMedia);
   } catch { /* fall through */ }
   return null;
+}
+
+// Home and About page text and images (Admin > Pages). `images` maps a Media id to its URLs.
+export async function loadContent() {
+  let data = {};
+  try {
+    await connectDB();
+    const doc = await Setting.findOne({ key: 'content' }).lean();
+    data = doc?.data || {};
+  } catch { /* defaults */ }
+  const c = mergeContent(data);
+  const ids = [c.home.heroImage, c.home.aboutImage1, c.home.aboutImage2, c.about.introImage].filter((x) => x && mongoose.isValidObjectId(x));
+  const images = {};
+  if (ids.length) {
+    try {
+      const docs = await Media.find({ _id: { $in: ids } }).lean();
+      for (const d of docs) images[String(d._id)] = { ...mediaUrls(d), title: d.title };
+    } catch { /* ignore */ }
+  }
+  return { ...c, images };
+}
+export const getContent = loadContent;
+
+export async function getTeam() {
+  try {
+    await connectDB();
+    const docs = await Team.find({ visible: true }).sort({ order: 1, createdAt: 1 }).populate('photo').lean();
+    return docs.map((m) => ({
+      id: String(m._id), name: m.name, role: m.role || '', bio: m.bio || '',
+      photo: m.photo && m.photo.cloudinaryId ? mediaUrls(m.photo).thumb : null,
+    }));
+  } catch { return []; }
+}
+
+export async function getTestimonials() {
+  try {
+    await connectDB();
+    const docs = await Testimonial.find({ visible: true }).sort({ order: 1, createdAt: 1 }).lean();
+    return docs.map((t) => ({ id: String(t._id), quote: t.quote, name: t.name || '', eventType: t.eventType || '' }));
+  } catch { return []; }
 }
