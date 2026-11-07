@@ -1,6 +1,7 @@
 import AboutView from '@/views/AboutView';
 import JsonLd from '@/components/JsonLd';
 import { getSettings } from '@/lib/settings';
+import { getContent, getTeam } from '@/lib/content';
 import { pageMetadata, breadcrumbLd } from '@/lib/seo';
 
 export const revalidate = 3600;
@@ -14,11 +15,12 @@ export async function generateMetadata() {
   });
 }
 
-export default function Page() {
+export default async function Page() {
+  const [content, team] = await Promise.all([getContent(), getTeam()]);
   return (
     <>
       <JsonLd data={breadcrumbLd([['Home', '/'], ['About', '/about']])} />
-      <AboutView />
+      <AboutView content={content} team={team} />
     </>
   );
 }

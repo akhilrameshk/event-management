@@ -1,5 +1,5 @@
 import HomeView from '@/views/HomeView';
-import { getWorks, getFeatured } from '@/lib/content';
+import { getWorks, getFeatured, getContent, getTestimonials } from '@/lib/content';
 import { getSettings } from '@/lib/settings';
 import { pageMetadata } from '@/lib/seo';
 
@@ -11,6 +11,6 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const [works, featured] = await Promise.all([getWorks(), getFeatured()]);
-  return <HomeView works={works} featured={featured} />;
+  const [works, featured, content, testimonials] = await Promise.all([getWorks(), getFeatured(), getContent(), getTestimonials()]);
+  return <HomeView works={works} featured={featured} content={content} testimonials={testimonials} />;
 }

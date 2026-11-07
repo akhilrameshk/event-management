@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
       <Photo i={3} sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', justifyContent: 'flex-end', p: 9, color: t.onDeep }}>
         <Overlay from=".35" to=".8" />
         <Box sx={{ position: 'relative' }}>
-          <Image src="/logo.png" alt="Elegant Events" width={445} height={280} style={{ width: 220, height: 'auto', marginBottom: 24 }} />
+          <Image src="/logo.png" alt="Elegant Events" width={760} height={311} style={{ width: 220, height: 'auto', marginBottom: 24 }} />
           <Box component="h2" sx={{ fontFamily: 'var(--font-lora), serif', fontWeight: 500, fontSize: 40 }}><GoldText onDeep>Admin Console</GoldText></Box>
           <Box sx={{ mt: 1.25 }}>Manage your gallery, works and media securely.</Box>
         </Box>
@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
         <Box component="form" onSubmit={submit} sx={{ width: '100%', maxWidth: 420, display: 'flex', flexDirection: 'column', gap: 2.5 }}>
           <Box sx={{ display: { md: 'none' }, mb: 1 }}>
             <Box sx={{ bgcolor: t.deepBg, p: 1.5, display: 'inline-block' }}>
-              <Image src="/logo.png" alt="Elegant Events" width={445} height={280} style={{ height: 52, width: 'auto', display: 'block' }} />
+              <Image src="/logo.png" alt="Elegant Events" width={760} height={311} style={{ height: 52, width: 'auto', display: 'block' }} />
             </Box>
           </Box>
           <Eyebrow>Authorized Access Only</Eyebrow>
