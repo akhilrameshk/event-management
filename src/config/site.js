@@ -27,7 +27,7 @@ export const DEFAULT_SETTINGS = {
 export const SETTING_KEYS = Object.keys(DEFAULT_SETTINGS);
 
 export const NAV = [
-  { label: 'Home', href: '/' },
+ 
   { label: 'Our Works', href: '/our-works' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'About', href: '/about' },

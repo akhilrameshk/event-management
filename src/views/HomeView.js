@@ -1,9 +1,17 @@
 'use client';
 import Link from 'next/link';
 import { Box } from '@mui/material';
+import { keyframes } from '@mui/system';
 import { useSite } from '@/components/SiteProvider';
 import Testimonials from '@/components/Testimonials';
 import { useT, GoldText, Eyebrow, SectionTitle, Photo, Overlay, GoldButton, Section } from '@/components/ui';
+
+// സുഗമമായ സൂം & ഫ്ലോട്ടിംഗ് ആനിമേഷൻ ഇഫക്റ്റ്
+const subtleZoom = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+`;
 
 const STRIP = ['Weddings', 'Corporate', 'Parties', 'Launches'];
 const SPANS = [
@@ -22,26 +30,46 @@ export default function HomeView({ works, featured, content, testimonials }) {
 
   return (
     <>
-      {/* Hero */}
-      <Photo i={4} src={im(hc.heroImage)?.src || undefined} priority sx={{ minHeight: { xs: 700, md: 820 }, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', px: 2.5, pb: { xs: 12, md: 14 }, color: t.onDeep }}>
-        <Overlay from=".5" to=".88" />
-        <Box sx={{ position: 'relative' }}>
-          <Eyebrow onDeep>Premium Event Management · {site.locality}</Eyebrow>
-          <Box component="h1" sx={{ fontFamily: 'var(--font-lora), serif', fontWeight: 500, fontSize: { xs: 34, md: 68 }, maxWidth: 960, mx: 'auto', my: 3 }}>
-            <GoldText onDeep>{site.tagline}</GoldText>
+      {/* Hero with Animated Background Image */}
+      <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+        <Photo 
+          i={4} 
+          src={im(hc.heroImage)?.src || "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=85"} 
+          priority 
+          sx={{ 
+            minHeight: { xs: 700, md: 820 }, 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            textAlign: 'center', 
+            px: 2.5, 
+            pb: { xs: 12, md: 14 }, 
+            color: t.onDeep,
+            animation: `${subtleZoom} 20s ease-in-out infinite`,
+          }}
+        >
+          <Overlay from=".6" to=".9" />
+          <Box sx={{ position: 'relative', zIndex: 2 }}>
+            <Eyebrow onDeep>Premium Event Management · {site.locality}</Eyebrow>
+            <Box component="h1" sx={{ fontFamily: 'var(--font-lora), serif', fontWeight: 500, fontSize: { xs: 34, md: 68 }, maxWidth: 960, mx: 'auto', my: 3 }}>
+              <GoldText onDeep>{site.tagline}</GoldText>
+            </Box>
+            <Box sx={{ maxWidth: 620, mx: 'auto', mb: 4.5, fontSize: { xs: 15, md: 18 }, color: 'rgba(255,255,255,0.85)' }}>
+              Weddings, corporate gatherings and grand celebrations in {site.locality}, {site.region}, designed and delivered with elegance.
+            </Box>
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <GoldButton component={Link} href="/our-works">Our Works</GoldButton>
+              <GoldButton outlined onDeep component={Link} href="/contact">Contact Us</GoldButton>
+            </Box>
           </Box>
-          <Box sx={{ maxWidth: 620, mx: 'auto', mb: 4.5 }}>Weddings, corporate gatherings and grand celebrations in {site.locality}, {site.region}, designed and delivered with elegance.</Box>
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <GoldButton component={Link} href="/our-works">Our Works</GoldButton>
-            <GoldButton outlined onDeep component={Link} href="/contact">Contact Us</GoldButton>
+          <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 2, display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' }, borderTop: `1px solid ${t.deepLine}`, bgcolor: `${t.overlay}.85)` }}>
+            {STRIP.map((s) => (
+              <Box key={s} sx={{ py: { xs: 1.75, md: 3.25 }, textAlign: 'center', fontFamily: 'var(--font-lora), serif', letterSpacing: '.14em', fontSize: { xs: 11, md: 14 }, textTransform: 'uppercase', color: t.goldLight, borderRight: `1px solid ${t.deepLine}` }}>{s}</Box>
+            ))}
           </Box>
-        </Box>
-        <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' }, borderTop: `1px solid ${t.deepLine}`, bgcolor: `${t.overlay}.7)` }}>
-          {STRIP.map((s) => (
-            <Box key={s} sx={{ py: { xs: 1.75, md: 3.25 }, textAlign: 'center', fontFamily: 'var(--font-lora), serif', letterSpacing: '.14em', fontSize: { xs: 11, md: 14 }, textTransform: 'uppercase', color: t.goldLight, borderRight: `1px solid ${t.deepLine}` }}>{s}</Box>
-          ))}
-        </Box>
-      </Photo>
+        </Photo>
+      </Box>
 
       {/* Gold band */}
       <Box sx={{ background: 'linear-gradient(90deg,#a67c1f,#f1d98a,#a67c1f)', color: '#0a0a0c', fontFamily: 'var(--font-lora), serif', fontSize: { xs: 14, md: 19 }, letterSpacing: '.22em', py: 2, whiteSpace: 'nowrap', overflow: 'hidden', textAlign: 'center' }}>
@@ -83,7 +111,8 @@ export default function HomeView({ works, featured, content, testimonials }) {
                 <Box component="li" key={x} sx={{ py: 0.75, pl: 3.5, position: 'relative', '&::before': { content: '""', position: 'absolute', left: 4, top: 17, width: 8, height: 8, bgcolor: t.gold, transform: 'rotate(45deg)' } }}>{x}</Box>
               ))}
             </Box>
-            <GoldButton component={Link} href="/about">Our Story</GoldButton>
+            <GoldButton outlined component="a" href={`/abut`}>Our Story </GoldButton>
+             
           </Box>
         </Box>
       </Section>
